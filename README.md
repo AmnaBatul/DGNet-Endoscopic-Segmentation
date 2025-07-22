@@ -15,3 +15,10 @@ The Dual-Guided Network (DGNet) architecture is comprised of two branches:
 * *Bilateral Attention Branch* which is composed of a mask decoder named Progressive Partial Decoder (PPD) and a module named Full-context Bilateral Relation (FBR). The primary objective of this branch is to focus attention on the ambiguous boundaries of lesion regions by augmenting the correlation between foreground and background cues in the images.
 * *Boundary Aggregation Branch* which is composed of a boundary decoder named Boundary-Aware Extraction (BAE) and a module named Boundary-guided Feature Aggregation (BFA). This branch utilizes additional boundary semantic cues to generate features that accentuate the structural aspects of lesion regions.
 
+## Implementation Details:
+
+The implementation was performed on [Kvasir-SEG dataset](https://www.kaggle.com/datasets/debeshjha1/kvasirseg) - a benchmark dataset for polyp segmentation in endoscopic images.
+
+While the original paper uses image resolution of 512x512 for Kvasir-SEG and batch size of 16, this implementation uses image resolution of 256x256 and batch size of 8. These adjusments were made to accommodate hardware resource constraints (limited GPU memory). As a result, performance metrics such as Dice and IoU scores are sightly lower than those reported in the paper.
+Despite this, the architecture remains faithful to the original.
+
