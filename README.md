@@ -106,5 +106,6 @@ The architecture is built around a shared encoder and two parallel, yet compleme
 | G-Score    | 92.83%        | 87.17%              |
 | Kappa      | 84.77%        | 84.55%              |
 | MCC        | 85.82%        | 84.72%              |
+
 **Note**: Paper results are based on 512×512 input images with a batch size of 16.  
 This implementation uses 256×256 resolution and batch size 8 due to GPU constraints.
