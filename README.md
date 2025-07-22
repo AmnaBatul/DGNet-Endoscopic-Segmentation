@@ -17,8 +17,20 @@ The Dual-Guided Network (DGNet) architecture is comprised of two branches:
 
 ## Implementation Details:
 
+### Dataset
 The implementation was performed on [Kvasir-SEG dataset](https://www.kaggle.com/datasets/debeshjha1/kvasirseg) - a benchmark dataset for polyp segmentation in endoscopic images.
 
 While the original paper uses image resolution of 512x512 for Kvasir-SEG and batch size of 16, this implementation uses image resolution of 256x256 and batch size of 8. These adjusments were made to accommodate hardware resource constraints (limited GPU memory). As a result, performance metrics such as Dice and IoU scores are sightly lower than those reported in the paper.
 Despite this, the architecture remains faithful to the original.
 
+## Main Architecture
+The architecture is built around a shared encoder and two parallel, yet complementary branches: *Bilateral Attention Branch* and *Boundary Aggregation Branch* to improve lesion localization and boundary precision.
+
+<img width="927" height="670" alt="image" src="https://github.com/user-attachments/assets/8aae2da6-0b34-4622-bae8-68a483bd68c6" />
+
+
+* Res2Net50 Backbone:
+  * This encoder captures captures multiscale features by splitting the convolutional channels into several smaller groups processed in parallel with different receptive fields.
+  * It outputs 5 stages of hierarchical feature maps: {X0, X1, X2, X3, X4}. Low level features {X0, X1} retain spatial details while high level features {X2, X3, X4} capture semantic context.
+  * For segmentation, only {X1, X2, X3, X4} are used; X0 is ignored due to redundant noise.
+    
